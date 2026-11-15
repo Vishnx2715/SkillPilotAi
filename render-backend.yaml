@@ -10,7 +10,7 @@ services:
     healthCheckPath: /api/v1/health
     envVars:
       - key: DATABASE_URL
-        sync: false          # Paste your Supabase connection string here in Render dashboard
+        value: ""              # Leave blank for now — add Supabase URL later
       - key: SECRET_KEY
         generateValue: true
       - key: ENVIRONMENT

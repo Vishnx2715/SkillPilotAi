@@ -10,20 +10,21 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     SECRET_KEY: str = "skillpilot_hackathon_super_secret_jwt_key_change_in_production_32bytes"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 120
-    DATABASE_URL: str = "sqlite+aiosqlite:///./skillpilot.db"
+    # Leave blank to run without a database (AI features only)
+    DATABASE_URL: str = ""
 
     @field_validator("DATABASE_URL", mode="before")
     @classmethod
     def normalize_database_url(cls, v: str) -> str:
-        # Render/Heroku hand out postgres:// or postgresql:// URLs; SQLAlchemy async needs asyncpg.
-        if isinstance(v, str):
-            if v.startswith("postgres://"):
-                v = "postgresql+asyncpg://" + v[len("postgres://"):]
-            elif v.startswith("postgresql://"):
-                v = "postgresql+asyncpg://" + v[len("postgresql://"):]
-            if v.startswith("postgresql+asyncpg://"):
-                # asyncpg rejects libpq's sslmode param
-                v = v.replace("?sslmode=require", "?ssl=require").replace("&sslmode=require", "&ssl=require")
+        if not v:
+            return v
+        # Render/Supabase hand out postgres:// or postgresql:// URLs; SQLAlchemy async needs asyncpg.
+        if v.startswith("postgres://"):
+            v = "postgresql+asyncpg://" + v[len("postgres://"):]
+        elif v.startswith("postgresql://"):
+            v = "postgresql+asyncpg://" + v[len("postgresql://"):]
+        if v.startswith("postgresql+asyncpg://"):
+            v = v.replace("?sslmode=require", "?ssl=require").replace("&sslmode=require", "&ssl=require")
         return v
 
     # CORS
