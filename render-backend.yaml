@@ -2,6 +2,7 @@ services:
   - type: web
     name: skillpilot-backend
     runtime: python
+    pythonVersion: "3.11.7"
     plan: free
     branch: main
     rootDir: backend
