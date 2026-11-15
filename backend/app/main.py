@@ -1,5 +1,7 @@
+import asyncio
 import logging
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -12,20 +14,54 @@ logging.basicConfig(
 logger = logging.getLogger("skillpilot")
 
 
+async def _init_db_with_retry():
+    """Create tables and seed data, retrying up to 5 times on network errors."""
+    from sqlalchemy import make_url
+    from app.db.base import Base
+    from app.db.session import engine
+    from app.db.seed import seed_data
+
+    u = make_url(settings.DATABASE_URL)
+    host = u.host or "unknown"
+
+    max_attempts = 5
+    delays = [2, 4, 8, 16]   # backoff in seconds between attempts
+
+    for attempt in range(1, max_attempts + 1):
+        try:
+            logger.info("DB connect attempt %d/%d (host=%s)...", attempt, max_attempts, host)
+            async with engine.begin() as conn:
+                await conn.run_sync(Base.metadata.create_all)
+            logger.info("Tables ready.")
+            try:
+                await seed_data()
+                logger.info("Database seeding completed.")
+            except Exception as seed_err:
+                logger.warning("Seed skipped: %s", seed_err)
+            return  # success
+
+        except (OSError, ConnectionRefusedError) as net_err:
+            if attempt == max_attempts:
+                logger.error(
+                    "Cannot reach database host=%s after %d attempts. "
+                    "Check DATABASE_URL host, region, and expiry. Last error: %s",
+                    host, max_attempts, net_err,
+                )
+                raise
+            wait = delays[attempt - 1]
+            logger.warning(
+                "DB connect failed (attempt %d/%d): %s — retrying in %ds...",
+                attempt, max_attempts, net_err, wait,
+            )
+            await asyncio.sleep(wait)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Starting Skill Pilot AI v3.0...")
 
     if settings.DATABASE_URL:
-        from app.db.base import Base
-        from app.db.session import engine
-        from app.db.seed import seed_data
-        async with engine.begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
-        try:
-            await seed_data()
-        except Exception as e:
-            logger.warning(f"Seed note: {e}")
+        await _init_db_with_retry()
         logger.info("Database connected and ready.")
     else:
         logger.info("No DATABASE_URL set — running without database (AI features only).")
@@ -49,7 +85,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── Routers ──────────────────────────────────────────────────────────────────
+# ── Routers ───────────────────────────────────────────────────────────────────
 from app.api.v1.auth import router as auth_router
 from app.api.v1.profiles import router as profiles_router
 from app.api.v1.careers import router as careers_router
