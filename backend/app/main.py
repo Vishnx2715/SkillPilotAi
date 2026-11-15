@@ -18,7 +18,7 @@ async def _init_db_with_retry():
     """Create tables and seed data, retrying up to 5 times on network errors."""
     from sqlalchemy import make_url
     from app.db.base import Base
-    from app.db.session import engine
+    from app.db.session import engine, _RENDER_INTERNAL_RE
     from app.db.seed import seed_data
 
     u = make_url(settings.DATABASE_URL)
@@ -42,11 +42,20 @@ async def _init_db_with_retry():
 
         except (OSError, ConnectionRefusedError) as net_err:
             if attempt == max_attempts:
-                logger.error(
-                    "Cannot reach database host=%s after %d attempts. "
-                    "Check DATABASE_URL host, region, and expiry. Last error: %s",
-                    host, max_attempts, net_err,
-                )
+                if _RENDER_INTERNAL_RE.match(host):
+                    logger.error(
+                        "Internal Render host '%s' cannot resolve. "
+                        "DB and web service must share region AND workspace. "
+                        "Use External Database URL (host ends .render.com) in DATABASE_URL, "
+                        "or set RENDER_DB_DOMAIN=<region>-postgres.render.com to auto-rewrite.",
+                        host,
+                    )
+                else:
+                    logger.error(
+                        "Cannot reach database host=%s after %d attempts. "
+                        "Check DATABASE_URL host, region, and expiry. Last error: %s",
+                        host, max_attempts, net_err,
+                    )
                 raise
             wait = delays[attempt - 1]
             logger.warning(

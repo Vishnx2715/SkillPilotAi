@@ -92,14 +92,31 @@ def _validate_and_build_engine():
             "host = aws-0-<region>.pooler.supabase.com"
         )
 
-    # ── H2: Render internal host warning ──────────────────────────────────────
+    # ── H2: Render internal host — optionally rewrite with RENDER_DB_DOMAIN ────
     if _RENDER_INTERNAL_RE.match(host):
-        logger.warning(
-            "Render internal DB host detected (%s). "
-            "Make sure this Postgres service is in the SAME region and "
-            "workspace as the web service, or DNS will fail.",
-            host,
-        )
+        render_db_domain = getattr(settings, "RENDER_DB_DOMAIN", "") or ""
+        if render_db_domain:
+            rewritten_host = f"{host}.{render_db_domain}"
+            logger.info(
+                "Render internal host rewritten: %s → %s (via RENDER_DB_DOMAIN)",
+                host, rewritten_host,
+            )
+            # Rebuild raw_url with the rewritten host
+            raw_url = raw_url.replace(f"@{host}:", f"@{rewritten_host}:", 1)
+            host = rewritten_host
+            # External host needs SSL
+            if not connect_args.get("ssl"):
+                connect_args["ssl"] = "require"
+                logger.info("SSL=require added for rewritten external host.")
+        else:
+            logger.warning(
+                "Render internal DB host detected (%s). "
+                "Make sure this Postgres service is in the SAME region and "
+                "workspace as the web service, or DNS will fail. "
+                "Optionally set RENDER_DB_DOMAIN (e.g. oregon-postgres.render.com) "
+                "to auto-rewrite to the external hostname.",
+                host,
+            )
 
     # ── T6: Supabase transaction pooler (port 6543) — no statement cache ──────
     connect_args: dict = {}

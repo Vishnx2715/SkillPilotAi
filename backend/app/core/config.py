@@ -51,6 +51,11 @@ class Settings(BaseSettings):
     PYTHON_EXECUTION_API_URL: str = ""
     PYTHON_EXECUTION_API_KEY: str = ""
 
+    # Render DB domain — if set, internal dpg-*-a hosts are rewritten to
+    # <host>.<RENDER_DB_DOMAIN> so external DNS resolves them.
+    # Example: oregon-postgres.render.com
+    RENDER_DB_DOMAIN: str = ""
+
     # File uploads
     UPLOAD_DIR: str = "./uploads"
     MAX_FILE_SIZE_MB: int = 5
