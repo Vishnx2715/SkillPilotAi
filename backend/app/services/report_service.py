@@ -148,7 +148,7 @@ def _build_pdf(data: Dict[str, Any], narrative: Dict[str, Any]) -> bytes:
         story = []
 
         # Title
-        story.append(Paragraph("PathForge AI — Career Readiness Report", h1))
+        story.append(Paragraph("Skill Pilot AI — Career Readiness Report", h1))
         story.append(Spacer(1, 0.3*cm))
         story.append(Paragraph(f"Student: {data['student_name']}", normal))
         story.append(Paragraph(f"Career Goal: {data['career_role']}", normal))
@@ -206,7 +206,7 @@ def _build_pdf(data: Dict[str, Any], narrative: Dict[str, Any]) -> bytes:
     except ImportError:
         # ReportLab not available — return a minimal text PDF substitute
         text = (
-            f"PathForge AI Career Readiness Report\n"
+            f"Skill Pilot AI Career Readiness Report\n"
             f"Student: {data['student_name']}\n"
             f"Career Goal: {data['career_role']}\n"
             f"Readiness: {data['readiness_score']:.0f}%\n"

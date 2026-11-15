@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: pathforge-backend
+    name: skillpilot-backend
     env: docker
     region: oregon
     plan: free

@@ -64,7 +64,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <div>
-              <span className="text-lg font-bold tracking-tight text-white block">PathForge</span>
+              <span className="text-lg font-bold tracking-tight text-white block">Skill Pilot</span>
               <span className="text-[10px] text-slate-500 uppercase tracking-wider">Career Readiness</span>
             </div>
           </Link>
@@ -113,7 +113,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           <div className="absolute inset-0 bg-black/60" onClick={() => setSidebarOpen(false)} />
           <aside className="absolute left-0 top-0 bottom-0 w-64 bg-slate-900 border-r border-slate-800 flex flex-col">
             <div className="p-5 border-b border-slate-800 flex items-center justify-between">
-              <span className="text-lg font-bold text-white">PathForge</span>
+              <span className="text-lg font-bold text-white">Skill Pilot</span>
               <button onClick={() => setSidebarOpen(false)} className="p-1 text-slate-400">
                 <X className="w-5 h-5" />
               </button>
@@ -153,7 +153,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               </button>
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-indigo-400 lg:hidden" />
-                <span className="text-sm font-semibold text-slate-200 lg:hidden">PathForge</span>
+                <span className="text-sm font-semibold text-slate-200 lg:hidden">Skill Pilot</span>
                 {profile?.target_role_name && (
                   <span className="hidden lg:flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300">
                     Target: <strong className="text-slate-100">{profile.target_role_name}</strong>
@@ -175,7 +175,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         </main>
 
         <footer className="border-t border-slate-800/60 py-4 text-center text-xs text-slate-500">
-          PathForge AI — Adaptive Career Readiness Platform
+          Skill Pilot AI — Adaptive Career Readiness Platform
         </footer>
       </div>
     </div>

@@ -170,23 +170,23 @@ async def seed_data():
 async def seed_demo_users(session, all_skills):
     """Create demo admin, mentors, and students with realistic data."""
     # Check if already seeded
-    res = await session.execute(select(User).where(User.email == "admin@pathforge.ai"))
+    res = await session.execute(select(User).where(User.email == "admin@skillpilot.ai"))
     if res.scalar_one_or_none():
         print("Demo users already exist, skipping.")
         return
 
     # Admin
     admin_user = User(
-        email="admin@pathforge.ai", username="admin", hashed_password=get_password_hash("admin123"), role="admin", is_active=True
+        email="admin@skillpilot.ai", username="admin", hashed_password=get_password_hash("admin123"), role="admin", is_active=True
     )
     session.add(admin_user)
     await session.flush()
 
     # Mentors
     mentor_data = [
-        {"email": "sarah.mentor@pathforge.ai", "username": "sarah_mentor", "full_name": "Sarah Chen", "expertise": "Full Stack Development, React, Node.js"},
-        {"email": "mike.mentor@pathforge.ai", "username": "mike_mentor", "full_name": "Mike Johnson", "expertise": "Python, Data Analysis, Machine Learning"},
-        {"email": "priya.mentor@pathforge.ai", "username": "priya_mentor", "full_name": "Priya Sharma", "expertise": "SQL, Database Design, Backend Architecture"},
+        {"email": "sarah.mentor@skillpilot.ai", "username": "sarah_mentor", "full_name": "Sarah Chen", "expertise": "Full Stack Development, React, Node.js"},
+        {"email": "mike.mentor@skillpilot.ai", "username": "mike_mentor", "full_name": "Mike Johnson", "expertise": "Python, Data Analysis, Machine Learning"},
+        {"email": "priya.mentor@skillpilot.ai", "username": "priya_mentor", "full_name": "Priya Sharma", "expertise": "SQL, Database Design, Backend Architecture"},
     ]
     for m in mentor_data:
         m_user = User(
@@ -217,35 +217,35 @@ async def seed_demo_users(session, all_skills):
 
     students_data = [
         {
-            "email": "alex.student@pathforge.ai", "username": "alex_student", "full_name": "Alex Rivera",
+            "email": "alex.student@skillpilot.ai", "username": "alex_student", "full_name": "Alex Rivera",
             "password": "student123",
             "skills": [("JavaScript", 1), ("Python", 3), ("SQL", 2), ("HTML", 2)],
             "target_role_id": fs_role.id if fs_role else None,
             "weekly_hours": 10,
         },
         {
-            "email": "jamie.student@pathforge.ai", "username": "jamie_student", "full_name": "Jamie Taylor",
+            "email": "jamie.student@skillpilot.ai", "username": "jamie_student", "full_name": "Jamie Taylor",
             "password": "student123",
             "skills": [("Python", 4), ("SQL", 3), ("Statistics", 2)],
             "target_role_id": da_role.id if da_role else None,
             "weekly_hours": 8,
         },
         {
-            "email": "carol.student@pathforge.ai", "username": "carol_student", "full_name": "Carol Nguyen",
+            "email": "carol.student@skillpilot.ai", "username": "carol_student", "full_name": "Carol Nguyen",
             "password": "student123",
             "skills": [("JavaScript", 3), ("React", 2), ("HTML", 3), ("CSS", 3)],
             "target_role_id": fs_role.id if fs_role else None,
             "weekly_hours": 12,
         },
         {
-            "email": "dave.student@pathforge.ai", "username": "dave_student", "full_name": "Dave Wilson",
+            "email": "dave.student@skillpilot.ai", "username": "dave_student", "full_name": "Dave Wilson",
             "password": "student123",
             "skills": [("Python", 2), ("SQL", 1), ("Git", 1)],
             "target_role_id": da_role.id if da_role else None,
             "weekly_hours": 6,
         },
         {
-            "email": "emma.student@pathforge.ai", "username": "emma_student", "full_name": "Emma Brown",
+            "email": "emma.student@skillpilot.ai", "username": "emma_student", "full_name": "Emma Brown",
             "password": "student123",
             "skills": [("JavaScript", 4), ("React", 3), ("Node.js", 2), ("SQL", 2), ("Git", 3)],
             "target_role_id": fs_role.id if fs_role else None,
@@ -355,7 +355,7 @@ async def seed_section3_data(session, all_skills: dict):
         return
 
     # ----- Campuses -----
-    campus1 = Campus(name="Pathforge Valley Institute of Technology", code="PVIT")
+    campus1 = Campus(name="Skill Pilot Valley Institute of Technology", code="PVIT")
     campus2 = Campus(name="Summit State College of Engineering", code="SSCE")
     session.add_all([campus1, campus2])
     await session.flush()
@@ -502,7 +502,7 @@ async def seed_section3_data(session, all_skills: dict):
             ))
 
     # ----- Notifications for demo users -----
-    res = await session.execute(select(User).where(User.email == "alex.student@pathforge.ai"))
+    res = await session.execute(select(User).where(User.email == "alex.student@skillpilot.ai"))
     alex_user = res.scalar_one_or_none()
     if alex_user:
         notifs = [

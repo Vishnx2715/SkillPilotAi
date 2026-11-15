@@ -16,7 +16,7 @@ class GapAnalystOutput(BaseModel):
 
 class GapAnalystAgent(BaseAgent):
     SYSTEM_PROMPT = """
-You are an expert AI Career Gap Analyst for PathForge AI.
+You are an expert AI Career Gap Analyst for Skill Pilot AI.
 Your role is to evaluate a learner's existing skills against target career role requirements.
 Produce an explainable, evidence-based skill gap analysis.
 Rules:

@@ -39,7 +39,7 @@ export const Login: React.FC = () => {
         <div className="mx-auto w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/20 mb-4">
           <Sparkles className="w-6 h-6 text-white" />
         </div>
-        <h2 className="text-3xl font-extrabold text-white tracking-tight">Sign in to PathForge AI</h2>
+        <h2 className="text-3xl font-extrabold text-white tracking-tight">Sign in to Skill Pilot AI</h2>
         <p className="mt-2 text-sm text-slate-400">
           Continue your adaptive career readiness path
         </p>

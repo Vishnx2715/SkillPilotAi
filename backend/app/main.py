@@ -36,12 +36,12 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
-logger = logging.getLogger("pathforge")
+logger = logging.getLogger("skillpilot")
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Starting PathForge AI v3.0...")
+    logger.info("Starting Skill Pilot AI v3.0...")
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     try:
@@ -49,13 +49,13 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"Seed note: {e}")
     yield
-    logger.info("PathForge AI shutting down.")
+    logger.info("Skill Pilot AI shutting down.")
 
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version="3.0.0",
-    description="PathForge AI — Career Readiness, Adaptive Learning, Practice Lab, Mentorship, College Connect & Career Intelligence",
+    description="Skill Pilot AI — Career Readiness, Adaptive Learning, Practice Lab, Mentorship, College Connect & Career Intelligence",
     lifespan=lifespan,
 )
 

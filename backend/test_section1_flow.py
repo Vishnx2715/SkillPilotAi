@@ -8,7 +8,7 @@ async def test_end_to_end_flow():
     async with AsyncClient(transport=transport, base_url="http://testserver") as client:
         print("\n--- 1. Testing Registration ---")
         reg_payload = {
-            "email": "learner_test@pathforge.ai",
+            "email": "learner_test@skillpilot.ai",
             "username": "learner_test",
             "password": "Password123!",
             "confirm_password": "Password123!"

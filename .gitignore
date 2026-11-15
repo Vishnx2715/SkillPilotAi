@@ -29,7 +29,7 @@ ENV/
 # Database
 *.db
 *.sqlite3
-pathforge.db
+skillpilot.db
 
 # Environment
 .env

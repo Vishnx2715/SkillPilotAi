@@ -39,7 +39,7 @@ class RoadmapPlannerOutput(BaseModel):
 
 class RoadmapPlannerAgent(BaseAgent):
     SYSTEM_PROMPT = """
-You are an expert AI Roadmap Planner for PathForge AI.
+You are an expert AI Roadmap Planner for Skill Pilot AI.
 Your role is to personalize phase objectives, module explanations, and practical tasks.
 Rules:
 1. Never invent prerequisite relationships that conflict with the provided graph.

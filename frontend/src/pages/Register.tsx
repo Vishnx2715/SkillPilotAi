@@ -47,7 +47,7 @@ export const Register: React.FC = () => {
         </div>
         <h2 className="text-3xl font-extrabold text-white tracking-tight">Create your account</h2>
         <p className="mt-2 text-sm text-slate-400">
-          PathForge AI — Adaptive Career-Readiness Platform
+          Skill Pilot AI — Adaptive Career-Readiness Platform
         </p>
       </div>
 

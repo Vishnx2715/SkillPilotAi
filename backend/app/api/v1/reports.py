@@ -43,7 +43,7 @@ async def download_pdf(
     return Response(
         content=pdf_bytes,
         media_type="application/pdf",
-        headers={"Content-Disposition": f"attachment; filename=pathforge_report_{report_id}.pdf"},
+        headers={"Content-Disposition": f"attachment; filename=skillpilot_report_{report_id}.pdf"},
     )
 
 

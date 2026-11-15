@@ -1,4 +1,4 @@
-# PathForge AI v3.0 - Career Readiness Platform
+# Skill Pilot AI v3.0 - Career Readiness Platform
 
 **Comprehensive career-readiness platform with AI-powered adaptive learning, mock interviews, job matching, college integration, and personalized mentorship.**
 
@@ -107,14 +107,14 @@ All services configured via `render.yaml` — zero manual setup required!
 
 | Role | Email | Password |
 |------|-------|----------|
-| Admin | admin@pathforge.ai | admin123 |
-| Mentor | sarah.mentor@pathforge.ai | mentor123 |
-| Student | alex.student@pathforge.ai | student123 |
+| Admin | admin@skillpilot.ai | admin123 |
+| Mentor | sarah.mentor@skillpilot.ai | mentor123 |
+| Student | alex.student@skillpilot.ai | student123 |
 
 ## 🎯 Project Structure
 
 ```
-pathforge-ai/
+skill-pilot-ai/
 ├── backend/
 │   ├── app/
 │   │   ├── agents/          # AI agents (Grok-powered)
@@ -173,7 +173,7 @@ curl http://localhost:8000/api/v1/health
 **Required:**
 - `VITE_API_BASE_URL` - Backend API URL with `/api/v1`
 
-Example: `http://localhost:8000/api/v1` (dev) or `https://pathforge-backend.onrender.com/api/v1` (prod)
+Example: `http://localhost:8000/api/v1` (dev) or `https://skillpilot-backend.onrender.com/api/v1` (prod)
 
 ## 📚 API Documentation
 
@@ -201,7 +201,7 @@ This project is licensed under the MIT License.
 
 ## 🐛 Issues & Support
 
-- GitHub Issues: [Create an issue](https://github.com/YOUR_USERNAME/pathforge-ai/issues)
+- GitHub Issues: [Create an issue](https://github.com/YOUR_USERNAME/skill-pilot-ai/issues)
 - Documentation: See [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ---

@@ -27,7 +27,7 @@ class ProgressCoachOutput(BaseModel):
 
 class ProgressCoachAgent(BaseAgent):
     SYSTEM_PROMPT = """
-You are an encouraging and supportive AI Career & Progress Coach for PathForge AI.
+You are an encouraging and supportive AI Career & Progress Coach for Skill Pilot AI.
 Analyze diagnostic test performance, explain why certain modules stay locked or require revision,
 and provide encouraging, actionable guidance.
 """

@@ -21,7 +21,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   const handleMount: OnMount = useCallback((editor, monaco) => {
     editorRef.current = editor;
     // Configure basic theme
-    monaco.editor.defineTheme('pathforge-dark', {
+    monaco.editor.defineTheme('skillpilot-dark', {
       base: 'vs-dark',
       inherit: true,
       rules: [],
@@ -29,7 +29,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
         'editor.background': '#0f172a',
       },
     });
-    monaco.editor.setTheme('pathforge-dark');
+    monaco.editor.setTheme('skillpilot-dark');
   }, []);
 
   const monacoLang = language === 'python' ? 'python' : 'javascript';

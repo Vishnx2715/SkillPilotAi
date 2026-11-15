@@ -12,7 +12,7 @@ from typing import Optional, Type, TypeVar
 from pydantic import BaseModel
 from app.core.ai_client import get_ai_client, get_active_model
 
-logger = logging.getLogger("pathforge.agents")
+logger = logging.getLogger("skillpilot.agents")
 T = TypeVar("T", bound=BaseModel)
 
 
@@ -31,7 +31,7 @@ def _build_json_schema(model: Type[BaseModel], agent_name: str) -> dict:
 
 class BaseAgent:
     # Subclasses can override to customise the agent name used in json_schema.
-    agent_name: str = "pathforge_agent"
+    agent_name: str = "skillpilot_agent"
 
     @classmethod
     async def call_structured_output(

@@ -1,4 +1,4 @@
-# PathForge AI - Render Deployment Guide
+# Skill Pilot AI - Render Deployment Guide
 
 ## Prerequisites
 
@@ -12,12 +12,12 @@
 
 1. **Push to GitHub**
    ```bash
-   cd pathforge-ai
+   cd skill-pilot-ai
    git init
    git add .
-   git commit -m "Initial commit - PathForge AI v3.0"
+   git commit -m "Initial commit - Skill Pilot AI v3.0"
    git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/pathforge-ai.git
+   git remote add origin https://github.com/YOUR_USERNAME/skill-pilot-ai.git
    git push -u origin main
    ```
 
@@ -29,13 +29,13 @@
    - Wait 10-15 minutes for initial deployment
 
 3. **Configure Environment Variables**
-   - Go to `pathforge-backend` service
+   - Go to `skillpilot-backend` service
    - Click "Environment" tab
    - Add: `XAI_API_KEY` = your Grok API key
    - Services will auto-redeploy
 
 4. **Update CORS**
-   - Once frontend deploys, copy its URL (e.g., `https://pathforge-frontend.onrender.com`)
+   - Once frontend deploys, copy its URL (e.g., `https://skillpilot-frontend.onrender.com`)
    - Go to backend service → Environment
    - Update `BACKEND_CORS_ORIGINS` to include frontend URL
    - Save (auto-redeploys)
@@ -45,8 +45,8 @@
 #### Step 1: Deploy PostgreSQL Database
 
 1. Dashboard → "New +" → "PostgreSQL"
-2. Name: `pathforge-db`
-3. Database: `pathforge`
+2. Name: `skillpilot-db`
+3. Database: `skillpilot`
 4. Plan: Free
 5. Region: Oregon (or closest)
 6. Click "Create Database"
@@ -58,7 +58,7 @@
 1. Dashboard → "New +" → "Web Service"
 2. Connect your GitHub repository
 3. Configure:
-   - **Name**: `pathforge-backend`
+   - **Name**: `skillpilot-backend`
    - **Region**: Oregon
    - **Branch**: main
    - **Root Directory**: `backend`
@@ -85,14 +85,14 @@
 
 5. Click "Create Web Service"
 6. Wait 5-10 minutes for first deployment
-7. Copy the backend URL (e.g., `https://pathforge-backend.onrender.com`)
+7. Copy the backend URL (e.g., `https://skillpilot-backend.onrender.com`)
 
 #### Step 3: Deploy Frontend
 
 1. Dashboard → "New +" → "Static Site"
 2. Connect your GitHub repository
 3. Configure:
-   - **Name**: `pathforge-frontend`
+   - **Name**: `skillpilot-frontend`
    - **Branch**: main
    - **Root Directory**: `frontend`
    - **Build Command**: 
@@ -130,7 +130,7 @@
 ### Database Seeding
 
 The database is automatically seeded on first startup with:
-- Demo admin account: `admin@pathforge.ai` / `admin123`
+- Demo admin account: `admin@skillpilot.ai` / `admin123`
 - Demo mentors and students
 - Skills, career roles, assessments
 - Sample coding problems
@@ -156,7 +156,7 @@ Free tier services sleep after 15 minutes of inactivity. First request after sle
 - `ACCESS_TOKEN_EXPIRE_MINUTES` - Default: `120`
 
 **Frontend (Required)**
-- `VITE_API_URL` - Backend URL (e.g., `https://pathforge-backend.onrender.com`)
+- `VITE_API_URL` - Backend URL (e.g., `https://skillpilot-backend.onrender.com`)
 
 ## Monitoring
 
@@ -219,7 +219,7 @@ npm run dev
 
 ## Support
 
-- GitHub Issues: https://github.com/YOUR_USERNAME/pathforge-ai/issues
+- GitHub Issues: https://github.com/YOUR_USERNAME/skill-pilot-ai/issues
 - Render Docs: https://render.com/docs
 - xAI Docs: https://docs.x.ai
 

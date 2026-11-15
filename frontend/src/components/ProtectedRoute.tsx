@@ -10,7 +10,7 @@ export const ProtectedRoute: React.FC<{ children: React.ReactElement }> = ({ chi
     return (
       <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-slate-200">
         <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mb-4" />
-        <p className="text-slate-400 font-medium">Loading PathForge AI session...</p>
+        <p className="text-slate-400 font-medium">Loading Skill Pilot AI session...</p>
       </div>
     );
   }

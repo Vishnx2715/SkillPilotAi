@@ -8,7 +8,7 @@ from typing import Optional
 from openai import AsyncOpenAI
 from app.core.config import settings
 
-logger = logging.getLogger("pathforge.ai")
+logger = logging.getLogger("skillpilot.ai")
 
 
 def get_ai_client() -> Optional[AsyncOpenAI]:
