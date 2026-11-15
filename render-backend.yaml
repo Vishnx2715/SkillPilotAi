@@ -2,7 +2,6 @@ services:
   - type: web
     name: skillpilot-backend
     runtime: python
-    pythonVersion: "3.11.7"
     plan: free
     branch: main
     rootDir: backend
@@ -11,9 +10,7 @@ services:
     healthCheckPath: /api/v1/health
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: skillpilot-db
-          property: connectionString
+        sync: false          # Paste your Supabase connection string here in Render dashboard
       - key: SECRET_KEY
         generateValue: true
       - key: ENVIRONMENT
@@ -23,13 +20,8 @@ services:
       - key: XAI_MODEL
         value: grok-2-1212
       - key: BACKEND_CORS_ORIGINS
-        value: https://skillpilot-frontend.onrender.com,http://localhost:3000
+        value: http://localhost:3000
       - key: MAX_FILE_SIZE_MB
         value: "5"
       - key: UPLOAD_DIR
         value: /tmp/uploads
-
-databases:
-  - name: skillpilot-db
-    databaseName: skillpilot
-    plan: free

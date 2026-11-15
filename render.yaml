@@ -1,15 +1,16 @@
 services:
   - type: web
     name: skillpilot-backend
-    env: docker
-    region: oregon
+    runtime: python
     plan: free
     branch: main
     rootDir: backend
-    dockerfilePath: ./Dockerfile
+    buildCommand: bash render-build.sh
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health
     envVars:
       - key: DATABASE_URL
-        sync: false
+        sync: false          # Paste your Supabase connection string here
       - key: SECRET_KEY
         generateValue: true
       - key: ENVIRONMENT
